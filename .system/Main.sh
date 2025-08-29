@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 # function definitions 
     #tests
         #function system() {
@@ -48,14 +50,11 @@
         echo " │                ┌────────────┴──────┤ "
         echo " │                │ By Skandar ###### │ "
         echo " └────────────────┴───────────────────┘ "
+        echo "  NOTE: the evaluator is run every time you enter a command, so any changes to the evaluator will be reflected immediately. "
     }
     # Define the evaluate function first
     evaluate() {
-        local input="$1"
-
-        if [ "$input" = "clear" ]; then
-            home
-        fi
+        ./evaluator.sh "$1"
 }
 
 
@@ -64,9 +63,11 @@
 # REPL loop
 home
 while true; do
-    echo -n "SkarOS> "
+    printf "SkarOS> "
     read user_input
-    echo "You entered: $user_input"
+    printf "\033[1A\033[2K" # Delete "SkarOS> " line
+
+
 
     evaluate "$user_input"
 done
